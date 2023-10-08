@@ -55,6 +55,10 @@ export const Total: FC<TotalProps1> = props => {
     const [totals, setTotals] = useState({ total_wagered: '-', total_users: '-', total_bets: '-' });
 
     useEffect(() => {
+        Api.GetTotalsFx().then((response) => {
+            const totals = response.body as Api.T_Totals;
+            setTotals({ total_wagered: (totals.sum ? totals.sum : 0).toFixed(2), total_users: totals.player_amount.toString(), total_bets: totals.bets_amount.toString() });
+        });
         const interval = setInterval(() => {
             //console.log('Logs every minute');
             Api.GetTotalsFx().then((response) => {
