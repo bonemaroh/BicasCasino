@@ -30,8 +30,77 @@ export type T_Networks = {
     networks: Array<T_NetworkFullInfo>
 };
 
-export type T_Localization = {
+export type T_Localization_Game = {
+    _name: string,
+    _name_small: string,
+    description: string
+}
 
+export type T_Localization_Language = {
+    _name: string,
+    _ref: string
+}
+
+export type T_Localization = {
+    layout: {
+        header: {
+            connectWalletButton: string
+        },
+        sidebar: {
+            games: {
+                _title: string,
+                coinflip: string,
+                dice: string,
+                rps: string,
+                poker: string
+            },
+            support: string,
+            language: {
+                _title: string,
+                _languages: T_Localization_Language[]
+            },
+            theme: {
+                currently: string,
+                dark: string,
+                Light: string
+            },
+            socials: string
+        },
+        footer: {
+
+        }
+    },
+    main_page: {
+        title: {
+            _title: string,
+            login: string,
+            connectWalletButton: string
+        },
+        totals: {
+            wagered: string,
+            bets: string,
+            users: string
+        }
+    },
+    shared_entities: {
+        livebets: {
+            _title: string,
+            time: string,
+            game: string,
+            player: string,
+            address: string,
+            wager: string,
+            multiplier: string,
+            profit: string,
+            explorer: string
+        },
+        games: {
+            poker: T_Localization_Game,
+            coinflip: T_Localization_Game,
+            dice: T_Localization_Game,
+            mines: T_Localization_Game
+        }
+    }
 }
 
 export type T_RpcUrl = {

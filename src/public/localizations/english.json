@@ -1,0 +1,103 @@
+{
+    "layout": {
+        "header": {
+            "connectWalletButton":"Connect Wallet"
+        },
+        "sidebar": {
+            "games": {
+                "_title": "Games",
+                "coinflip": "Coinflip",
+                "dice": "Dice",
+                "rps": "Rock Paper Scissors",
+                "poker":"Poker"
+            },
+            "support":"Support",
+            "language": {
+                "_title": "LANGUAGE",
+                "_languages": [
+                    {
+                        "_name": "English",
+                        "_ref": "english"
+                    },
+                    {
+                        "_name": "Ukranian",
+                        "_ref": "ukranian"
+                    },
+                    {
+                        "_name": "Russian",
+                        "_ref": "russian"
+                    },
+                    {
+                        "_name": "Greek",
+                        "_ref": "greek"
+                    },
+                    {
+                        "_name": "Chinese",
+                        "_ref": "chinese"
+                    }
+                ]
+            },
+            "theme": {
+                "currently": "currently",
+                "dark": "Dark",
+                "Light": "Light"
+            },
+            "socials": "Our social networks"
+        },
+        "footer": {
+
+        }
+    },
+    "main_page": {
+        "title": {
+            "_title": "Top 1 Casino on the WEB3",
+            "login": "Login via Web3 wallets",
+            "connectWalletButton":"Connect Wallet"
+        },
+        "totals": {
+            "wagered": "TOTAL WAGERED",
+            "bets": "TOTAL BETS",
+            "users": "TOTAL USERS"
+        }
+    },
+    "shared_entities": {
+        "livebets": {
+            "_title": "Live Bets",
+            "time": "Time",
+            "game": "Game",
+            "player": "Player",
+            "address": "Address",
+            "wager": "Wager",
+            "multiplier": "Multiplier",
+            "profit": "Profit",
+            "explorer": "Explorer"
+        },
+        "games": {
+            "poker": {
+                "_name": "POKER",
+                "_name_small": "Poker",
+                "description": "Poker"
+            },
+            "coinflip": {
+                "_name": "COINFLIP",
+                "_name_small": "CoinFlip",
+                "description": ""
+            },
+            "dice": {
+                "_name": "DICE",
+                "_name_small": "Dice",
+                "description": ""
+            },
+            "mines": {
+                "_name": "MINES",
+                "_name_small": "Mines",
+                "description": ""
+            },
+            "rps": {
+                "_name": "ROCK PAPER SCISSORS",
+                "_name_small": "Rock Paper Scissors",
+                "description": "description"
+            }
+        }
+    }
+}

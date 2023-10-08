@@ -3,7 +3,7 @@ import * as Api from '@/shared/api';
 import { getLocalizationFx } from "@/shared/api";
 
 // variables
-export const $Localization = createStore<Api.T_Localization>({})
+export const $Localization = createStore<Api.T_Localization | null>(null)
 export const $AvailableNetworks = createStore<Api.T_Networks>({ networks: [] });
 export const $AvailableRpcs = createStore<Api.T_Rpcs>({ rpcs: [] });
 export const $AvailableTokens = createStore<Api.T_Tokens>({ tokens: [] });
@@ -36,6 +36,7 @@ $AvailableRpcs.on(Api.getRpcsFx.doneData, (_, payload) => {
 // }).on(setAvailableTokens, (_, tokens) => tokens);
 
 $AvailableTokens.on(setAvailableTokens, (_, tokens) => tokens);
+$Localization.on(Api.getLocalizationFx.doneData, (_, payload) => payload);
 
 $AvailableNetworks.on(setAvailableNetworks, (_, networks) => networks);
 $AvailableRpcs.on(setAvailableRpcs, (_, rpcs) => rpcs);

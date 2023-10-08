@@ -7,6 +7,7 @@ import trophy from "../../public/media/total/trophy.png";
 import { SideBarModel } from '../SideBar';
 import { useUnit } from 'effector-react';
 import * as Api from '@/shared/api';
+import { settingsModel } from '@/entities/settings';
 
 const triplex = (n: string): string => n.replace(/(?!^)(\d{3})(?=(\d{3})*$)/g, " $1");
 
@@ -52,6 +53,11 @@ const TotalItem: FC<TotalItemProps> = props => {
 
 export interface TotalProps1 { }
 export const Total: FC<TotalProps1> = props => {
+    const [
+        Localization
+    ] = useUnit([
+        settingsModel.$Localization
+    ]);
     const [totals, setTotals] = useState({ total_wagered: '-', total_users: '-', total_bets: '-' });
 
     useEffect(() => {
@@ -80,9 +86,9 @@ export const Total: FC<TotalProps1> = props => {
 
     return (<>
         <div className={s.total_container}>
-            <TotalItem description='total wagered' image={locker} dollar statistics={totals.total_wagered} />
-            <TotalItem description='total bets' image={star} statistics={totals.total_bets} />
-            <TotalItem description='total users' image={trophy} statistics={totals.total_users} />
+            <TotalItem description={Localization ? Localization.main_page.totals.wagered : ""} image={locker} dollar statistics={totals.total_wagered} />
+            <TotalItem description={Localization ? Localization.main_page.totals.bets : ""} image={star} statistics={totals.total_bets} />
+            <TotalItem description={Localization ? Localization.main_page.totals.bets : ""} image={trophy} statistics={totals.total_users} />
         </div>
     </>);
 }

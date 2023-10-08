@@ -77,10 +77,16 @@ const Links: FC<LinksProps> = (props) => {
 
 interface ConnectWalletButtonProps { }
 const ConnectWalletButton: FC<ConnectWalletButtonProps> = (props) => {
-  const [isOpen, isMainWalletOpen, setBlur] = useUnit([
+  const [
+    isOpen,
+    isMainWalletOpen,
+    setBlur,
+    Localization
+  ] = useUnit([
     SideBarModel.$isOpen,
     MainWallet.$isMainWalletOpen,
     BlurModel.setBlur,
+    settingsModel.$Localization
   ]);
 
   const [walletVisibility, setWalletVisibility] = useState(false);
@@ -116,7 +122,7 @@ const ConnectWalletButton: FC<ConnectWalletButtonProps> = (props) => {
   return (
     <div className={s.connect_wallet_button_wrap}>
       <div className={s.connect_wallet_button} onClick={handleConnectWalletBtn}>
-        Connect Wallet
+        {Localization?.layout.header.connectWalletButton}
       </div>
       <div
         className={`${s.header_avaibleWallet_wrap} ${walletVisibility && s.avaibleWallet_visible

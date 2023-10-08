@@ -21,12 +21,14 @@ export const CustomBets: FC<CustomBetsProps> = props => {
     Bets,
     setBets,
     AvailableBlocksExplorers,
-    newBet
+    newBet,
+    Localization
   ] = useUnit([
     LiveBetsModel.$Bets,
     LiveBetsModel.setBets,
     settingsModel.$AvailableBlocksExplorers,
-    sessionModel.$newBet
+    sessionModel.$newBet,
+    settingsModel.$Localization
   ]);
 
   const { isConnected, address } = useAccount();
@@ -111,14 +113,14 @@ export const CustomBets: FC<CustomBetsProps> = props => {
       </div>
       <div className={s.customBets_body}>
         <div className={s.customBets_titles_list}>
-          <span className={s.customBets_titles_list_item}>Time</span>
-          <span className={s.customBets_titles_list_item}>Game</span>
-          <span className={s.customBets_titles_list_item}>Player</span>
-          <span className={s.customBets_titles_list_item} data-id='address'>Address</span>
-          <span className={s.customBets_titles_list_item} data-id='wager'>Wager</span>
-          <span className={s.customBets_titles_list_item} data-id='multiplier'>Multiplier</span>
-          <span className={s.customBets_titles_list_item} data-id='profit'>Profit</span>
-          <span className={s.customBets_titles_list_item} data-id='explorer'>Explorer</span>
+          <span className={s.customBets_titles_list_item}>{Localization?.shared_entities.livebets.time}</span>
+          <span className={s.customBets_titles_list_item}>{Localization?.shared_entities.livebets.game}</span>
+          <span className={s.customBets_titles_list_item}>{Localization?.shared_entities.livebets.player}</span>
+          <span className={s.customBets_titles_list_item} data-id='address'>{Localization?.shared_entities.livebets.address}</span>
+          <span className={s.customBets_titles_list_item} data-id='wager'>{Localization?.shared_entities.livebets.wager}</span>
+          <span className={s.customBets_titles_list_item} data-id='multiplier'>{Localization?.shared_entities.livebets.multiplier}</span>
+          <span className={s.customBets_titles_list_item} data-id='profit'>{Localization?.shared_entities.livebets.profit}</span>
+          <span className={s.customBets_titles_list_item} data-id='explorer'>{Localization?.shared_entities.livebets.explorer}</span>
         </div>
         <div className={s.customBets_list}>
           {

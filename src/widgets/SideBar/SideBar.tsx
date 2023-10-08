@@ -26,11 +26,17 @@ import Telegram from "@/public/media/social_media/Telegram.svg";
 import tgClosedSidebarIco from "@/public/media/sidebar_icons/TelegramIco.svg";
 import Insta from "@/public/media/social_media/Insta.svg";
 import { LanguageSwitcher } from "@/widgets/LanguageSwitcher/LanguageSwitcher";
+import { settingsModel } from "@/entities/settings";
 
 interface ClosedSideBarProps {
   pickedGame: number | null;
 }
 const ClosedSideBar: FC<ClosedSideBarProps> = (props) => {
+  const [
+    Localization
+  ] = useUnit([
+    settingsModel.$Localization
+  ]);
   return (
     <>
       <div className={s.side_bar_upper}>
@@ -44,21 +50,21 @@ const ClosedSideBar: FC<ClosedSideBarProps> = (props) => {
                 }`}
             >
               <CoinButton />
-              <div className={s.games_button_tooltip}>Coinflip</div>
+              <div className={s.games_button_tooltip}>{Localization ? Localization.layout.sidebar.games.coinflip : ""}</div>
             </div>
             <div
               className={`${s.button} ${props.pickedGame == 1 ? s.button_picked : ""
                 }`}
             >
               <DiceButton />
-              <div className={s.games_button_tooltip}>Dice</div>
+              <div className={s.games_button_tooltip}>{Localization ? Localization.layout.sidebar.games.dice : ""}</div>
             </div>
             <div
               className={`${s.button} ${props.pickedGame == 2 ? s.button_picked : ""
                 }`}
             >
               <RPCButton />
-              <div className={s.games_button_tooltip}>Rock paper scissors</div>
+              <div className={s.games_button_tooltip}>{Localization ? Localization.layout.sidebar.games.rps : ""}</div>
             </div>
             <div
               className={`${s.button} ${props.pickedGame == 3 ? s.button_picked : ""
@@ -66,7 +72,7 @@ const ClosedSideBar: FC<ClosedSideBarProps> = (props) => {
               onClick={() => { location.href = "/games/Poker" }}
             >
               <PokerButton />
-              <div className={s.games_button_tooltip}>Poker</div>
+              <div className={s.games_button_tooltip}>{Localization ? Localization.layout.sidebar.games.poker : ""}</div>
             </div>
             <div
               className={`${s.button} ${props.pickedGame == 3 ? s.button_picked : ""
@@ -75,7 +81,7 @@ const ClosedSideBar: FC<ClosedSideBarProps> = (props) => {
             >
               <SupportIcon />
               <div className={s.games_button_tooltip}>
-                Support{" "}
+                {Localization ? Localization.layout.sidebar.support : ""}{" "}
                 <Image className={s.tg_sidebar_ico} src={tgClosedSidebarIco} alt={""} />{" "}
               </div>
             </div>
@@ -91,6 +97,11 @@ interface OpenedSideBarProps {
   pickedGame: number | null;
 }
 const OpenedSideBar: FC<OpenedSideBarProps> = (props) => {
+  const [
+    Localization
+  ] = useUnit([
+    settingsModel.$Localization
+  ]);
   const [gamesAreOpen, setOpen] = useState(true);
   return (
     <>
@@ -108,7 +119,7 @@ const OpenedSideBar: FC<OpenedSideBarProps> = (props) => {
             >
               <div className={s.header_icon_container}>
                 <GamesIcon />
-                GAMES
+                {Localization ? Localization.layout.sidebar.games._title : ""}
               </div>
               <div
                 className={`${s.arrow} ${gamesAreOpen ? s.arrow_down : s.arrow_side
@@ -120,19 +131,19 @@ const OpenedSideBar: FC<OpenedSideBarProps> = (props) => {
             <div className={s.game_rows}>
               <div className={`${s.game_row} ${s.picked_game_row}`}>
                 <CoinButton />
-                Coinflip
+                {Localization ? Localization.layout.sidebar.games.coinflip : ""}
               </div>
               <div className={s.game_row}>
                 <DiceButton />
-                Dice
+                {Localization ? Localization.layout.sidebar.games.dice : ""}
               </div>
               <div className={s.game_row}>
                 <RPCButton />
-                Rock Paper Scissors
+                {Localization ? Localization.layout.sidebar.games.rps : ""}
               </div>
               <div className={s.game_row} onClick={() => { location.href = "/games/Poker" }}>
                 <PokerButton />
-                Poker
+                {Localization ? Localization.layout.sidebar.games.poker : ""}
               </div>
             </div>
           </div>
@@ -140,7 +151,7 @@ const OpenedSideBar: FC<OpenedSideBarProps> = (props) => {
             <div className={s.icon_wrapper}>
               <SupportIcon />
             </div>
-            <div className={s.large_header_text}>SUPPORT</div>
+            <div className={s.large_header_text}>{Localization ? Localization.layout.sidebar.support : ""}</div>
           </div>
           <LanguageSwitcher />
           {/* <div className={s.language_settings}>
@@ -148,7 +159,7 @@ const OpenedSideBar: FC<OpenedSideBarProps> = (props) => {
         </div>
         <div className={s.lower_blocks}>
           <div className={s.social_networks}>
-            Our social networks
+            {Localization ? Localization.layout.sidebar.socials : ""}
             <div className={s.icons}>
               <a
                 href="https://discord.gg/ReJVd2xJSk"

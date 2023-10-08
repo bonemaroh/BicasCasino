@@ -1,0 +1,103 @@
+{
+    "layout": {
+        "header": {
+            "connectWalletButton":"Подключить кошелек"
+        },
+        "sidebar": {
+            "games": {
+                "_title": "Игры",
+                "coinflip": "Коинфлип",
+                "dice": "Кости",
+                "rps": "Камень Ножницы Бумага",
+                "poker":"Покер"
+            },
+            "support":"Поддержка",
+            "language": {
+                "_title": "ЯЗЫК",
+                "_languages": [
+                    {
+                        "_name": "Английский",
+                        "_ref": "english"
+                    },
+                    {
+                        "_name": "Украинский",
+                        "_ref": "ukranian"
+                    },
+                    {
+                        "_name": "Русский",
+                        "_ref": "russian"
+                    },
+                    {
+                        "_name": "Греческий",
+                        "_ref": "greek"
+                    },
+                    {
+                        "_name": "Китайский",
+                        "_ref": "chinese"
+                    }
+                ]
+            },
+            "theme": {
+                "currently": "выбрано",
+                "dark": "Темная",
+                "Light": "Светлая"
+            },
+            "socials": "Наши соц. сети"
+        },
+        "footer": {
+
+        }
+    },
+    "main_page": {
+        "title": {
+            "_title": "Топ 1 казино в ВЕБ3",
+            "login": "подключиться через ВЕБ3 кошелек",
+            "connectWalletButton":"Подключить кошелек"
+        },
+        "totals": {
+            "wagered": "ВСЕГО ПОСТАВИЛИ",
+            "bets": "ВСЕГО СТАВОК",
+            "users": "ВСЕГО ПОЛЬЗОВАТЕЛЕЙ"
+        }
+    },
+    "shared_entities": {
+        "livebets": {
+            "_title": "Ставки",
+            "time": "Время",
+            "game": "Игра",
+            "player": "Игрок",
+            "address": "Адрес",
+            "wager": "Ставка",
+            "multiplier": "Множитель",
+            "profit": "Профит",
+            "explorer": "Эксплорер"
+        },
+        "games": {
+            "poker": {
+                "_name": "ПОКЕР",
+                "_name_small": "Покер",
+                "description": "Покер"
+            },
+            "coinflip": {
+                "_name": "КОИНФЛИП",
+                "_name_small": "Коинфлип",
+                "description": ""
+            },
+            "dice": {
+                "_name": "КОСТИ",
+                "_name_small": "Кости",
+                "description": ""
+            },
+            "mines": {
+                "_name": "МИНЫ",
+                "_name_small": "Мины",
+                "description": ""
+            },
+            "rps": {
+                "_name": "КАМЕНЬ НОЖНИЦЫ БУМАГА",
+                "_name_small": "Камень ножницы бумага",
+                "description": ""
+            }
+        }
+    }
+}

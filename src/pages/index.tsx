@@ -190,14 +190,19 @@ const Game: FC<GameProps> = (props) => {
 interface GamesProps { }
 
 const Games: FC<GamesProps> = (props) => {
+  const [
+    Localization
+  ] = useUnit([
+    settingsModel.$Localization
+  ]);
   return (
     <div className={s.games}>
       {/* <GamesTitle></GamesTitle> */}
       <div className={s.games_row}>
         <Game
-          name={"POKER"}
+          name={Localization ? Localization.shared_entities.games.poker._name : ""}
           description={
-            "Poker"
+            Localization ? Localization.shared_entities.games.poker.description : ""
           }
           link={"/games/Poker"}
           pcImage={pokerMainBg}
@@ -207,9 +212,9 @@ const Games: FC<GamesProps> = (props) => {
           closedSidebarImage={pokerClosedSidebarImg}
         />
         <Game
-          name={"DICE"}
+          name={Localization ? Localization.shared_entities.games.dice._name : ""}
           description={
-            ""
+            Localization ? Localization.shared_entities.games.dice.description : ""
           }
           link={"/games/Dice"}
           tabletImage={diceTabletBg}
@@ -222,9 +227,9 @@ const Games: FC<GamesProps> = (props) => {
 
       <div className={s.games_row}>
         <Game
-          name={"COINFLIP"}
+          name={Localization ? Localization.shared_entities.games.coinflip._name : ""}
           description={
-            ""
+            Localization ? Localization.shared_entities.games.coinflip.description : ""
           }
           link={"/games/Coinflip"}
           tabletImage={coinflipTabletBg}
@@ -234,9 +239,9 @@ const Games: FC<GamesProps> = (props) => {
           closedSidebarImage={coinflipClosedSidebarImg}
         />
         <Game
-          name={"MINES"}
+          name={Localization ? Localization.shared_entities.games.mines._name : ""}
           description={
-            ""
+            Localization ? Localization.shared_entities.games.mines.description : ""
           }
           link={"/games/Mines"}
           tabletImage={minesTabletBg}
@@ -357,10 +362,12 @@ const BannerInfo: FC<BannerInfoProps> = (props) => {
 export default function Home() {
   const [
     Bets,
-    AvailableBlocksExplorers
+    AvailableBlocksExplorers,
+    Localization
   ] = useUnit([
     LiveBetsModel.$Bets,
-    settingsModel.$AvailableBlocksExplorers
+    settingsModel.$AvailableBlocksExplorers,
+    settingsModel.$Localization
   ]);
 
   useEffect(() => {
@@ -386,7 +393,7 @@ export default function Home() {
           <BannerInfo />
           <Games />
           <Total />
-          <CustomBets title='Live bets' isMainPage={true} isGamePage={false} game={undefined} />
+          <CustomBets title={Localization ? Localization.shared_entities.livebets._title : ''} isMainPage={true} isGamePage={false} game={undefined} />
           {/* <LeaderBoard /> */}
         </div>
         {/* </div> */}
