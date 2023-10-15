@@ -40,6 +40,7 @@ import { useAccount } from "wagmi";
 import TestProfilePic from "@/public/media/misc/TestProfilePic.svg";
 import Link from "next/link";
 import { checkPageClicking } from "@/shared/tools";
+import Blockies from "react-blockies";
 
 interface EmblemProps {}
 const Emblem: FC<EmblemProps> = (props) => {
@@ -238,10 +239,14 @@ const RightMenu: FC<RightMenuProps> = (props) => {
           {isConnected ? (
             <div className={s.header_profile_ico_wrap}>
               <div
-                className={s.header_profile_ico_block}
+                className={s.header_blockies_wrap}
                 onClick={handleHeaderAccountVisibility}
               >
-                <span className={s.header_profile_ico_title}>А</span>
+                <Blockies
+                  seed={address}
+                  bgColor="#fff"
+                  className={s.header_profile_ico_block}
+                />
               </div>
               {isHeaderAccOpened && (
                 <Account
