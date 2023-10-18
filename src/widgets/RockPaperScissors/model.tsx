@@ -1,9 +1,9 @@
 import { createEffect, createEvent, createStore, sample } from 'effector';
 
 export enum Symbol {
-    Rock,
-    Paper,
-    Scissors
+	Rock,
+	Paper,
+	Scissors
 }
 
 // variables
