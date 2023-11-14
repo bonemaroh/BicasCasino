@@ -370,13 +370,11 @@
   .customBets_list_item_profit {
     font-size: 10px !important;
   }
-  .customBets_list_item_game_ico {
-    margin-right: 5px !important;
-  }
+
   .customBets_list_item_player_ico,
   .customBets_list_item_game_ico {
-    width: 20px !important;
-    height: 20px !important;
+    // width: 20px !important;
+    // height: 20px !important;
     span {
       font-size: 12px !important;
     }
@@ -442,5 +440,18 @@
   }
   .customBets_list_item_player {
     margin-left: 0 !important;
+  }
+}
+
+.customBets_list_item_game_ico {
+  display: block;
+  margin-right: 5px !important;
+  width: 30px !important;
+  height: 30px !important;
+  // min-width: 30px !important;
+  // min-height: 30px !important;
+  @media (max-width: 650px) {
+    width: 20px !important;
+    height: 20px !important;
   }
 }
