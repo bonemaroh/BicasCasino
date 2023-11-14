@@ -1,18 +1,11 @@
 import s from "./styles.module.scss";
 
-import pokerIco from "@/public/media/live_bets/pokerIco.png";
-import diceIco from "@/public/media/live_bets/diceIco.png";
-import rpsIco from "@/public/media/live_bets/rpsIco.png";
-import plinkoIco from "@/public/media/live_bets/plinkoIco.png";
-import coinFlipIco from "@/public/media/live_bets/coinflipIco.png";
-import minesIco from "@/public/media/live_bets/minesIco.png";
-
-// import pokerIco from "@/public/media/live_bets/pokerIco.png";
-// import diceIco from "@/public/media/live_bets/diceIco.png";
-// import rpsIco from "@/public/media/live_bets/rpsIco.png";
-// import coinFlipIco from "@/public/media/live_bets/coinflipIco.png";
-// import minesIco from "@/public/media/live_bets/minesIco.png";
-import plinkoIcoMobile from "@/public/media/live_bets/plincoSvg.svg";
+import diceIcon from "@/public/media/live_bets/dice.svg";
+import coinFlipIcon from "@/public/media/live_bets/coinFlip.svg";
+import pokerIcon from "@/public/media/live_bets/poker.svg";
+import rpsIcon from "@/public/media/live_bets/rps.svg";
+import bombIcon from "@/public/media/live_bets/bomb.svg";
+import plincoIcon from "@/public/media/live_bets/plinco.svg";
 
 import linkIco from "@/public/media/live_bets/linkIco.svg";
 import wagerIco from "@/public/media/live_bets/wagerIco.svg";
@@ -20,7 +13,6 @@ import Image from "next/image";
 import { FC, useEffect, useState } from "react";
 import Link from "next/link";
 import * as api from "@/shared/api";
-import { useMediaQuery } from "@/shared/tools";
 
 export interface CustomBetsItemProps {
   trx_url: string;
@@ -38,23 +30,21 @@ export interface CustomBetsItemProps {
   token: string;
 }
 export const CustomBetsItem: FC<CustomBetsItemProps> = (props) => {
-  const [gameImg, setGameImg] = useState(pokerIco);
-
-  const isMobile = useMediaQuery("(max-width: 650px)");
+  const [gameImg, setGameImg] = useState(pokerIcon);
 
   useEffect(() => {
     if (props.game_name === "CoinFlip") {
-      setGameImg(coinFlipIco);
+      setGameImg(coinFlipIcon);
     } else if (props.game_name === "Dice") {
-      setGameImg(diceIco);
+      setGameImg(diceIcon);
     } else if (props.game_name === "Mines") {
-      setGameImg(minesIco);
+      setGameImg(bombIcon);
     } else if (props.game_name === "RockPaperScissors") {
-      setGameImg(rpsIco);
+      setGameImg(rpsIcon);
     } else if (props.game_name === "Poker") {
-      setGameImg(pokerIco);
+      setGameImg(pokerIcon);
     } else if (props.game_name === "Plinko") {
-      setGameImg(plinkoIcoMobile);
+      setGameImg(plincoIcon);
     }
   });
 

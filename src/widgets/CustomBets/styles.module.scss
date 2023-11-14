@@ -448,10 +448,10 @@
   margin-right: 5px !important;
   width: 30px !important;
   height: 30px !important;
-  // min-width: 30px !important;
-  // min-height: 30px !important;
+  border-radius: 10px;
   @media (max-width: 650px) {
     width: 20px !important;
     height: 20px !important;
+    border-radius: 6px;
   }
 }
