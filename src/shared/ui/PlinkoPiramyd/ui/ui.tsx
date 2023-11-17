@@ -11,6 +11,7 @@ import { useDeviceType } from "@/shared/tools";
 
 import * as levelModel from "@/widgets/PlinkoLevelsBlock/model";
 import useSound from "use-sound";
+import clsx from "clsx";
 
 interface PlinkoBallProps {
   path: boolean[];
@@ -273,8 +274,17 @@ export const PlinkoPyramid: FC<IPlinkoPyramid> = (props) => {
     const rows = [];
     for (let i = 0; i < rowCount; i++) {
       const dots = [];
+      const ballPosition = Math.floor((pathIndex + 1) / 2);
       for (let j = 0; j < i + 3; j++) {
-        dots.push(<span className={styles.dot} key={j}></span>);
+        dots.push(
+          <span
+            className={clsx(
+              styles.dot,
+              j === ballPosition && styles.dot_shadow
+            )}
+            key={j}
+          ></span>
+        );
       }
 
       rows.push(
