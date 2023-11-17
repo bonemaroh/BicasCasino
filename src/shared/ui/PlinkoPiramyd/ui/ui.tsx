@@ -274,13 +274,21 @@ export const PlinkoPyramid: FC<IPlinkoPyramid> = (props) => {
     const rows = [];
     for (let i = 0; i < rowCount; i++) {
       const dots = [];
+      // let position;
+
+      props.path?.forEach((e) => {
+        e.forEach;
+      });
+      let positions = props?.path && props?.path[0][i];
+
       const ballPosition = Math.floor((pathIndex + 1) / 2);
       for (let j = 0; j < i + 3; j++) {
         dots.push(
           <span
             className={clsx(
               styles.dot,
-              j === ballPosition && styles.dot_shadow
+              (!positions && j === 0 && i === 0) ||
+                (positions && j === 1 && i === 0 && styles.dot_shadow)
             )}
             key={j}
           ></span>
