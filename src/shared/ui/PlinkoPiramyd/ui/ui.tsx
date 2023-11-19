@@ -349,41 +349,57 @@ export const PlinkoPyramid: FC<IPlinkoPyramid> = (props) => {
       setAnimaitionDelay(animationFinished);
     }, pickedRows * (isMobile ? 210 : 215));
   }, [animationFinished]);
-  const [changedArr, setChangedArr] = useState<any>();
-  const [smatch, setMatch] = useState(false);
+
+  const [dotsChanges, setDotsChanges] = useState<any[]>([]);
+
   useEffect(() => {
-    setChangedArr(lightStore);
-  }, [lightStore]);
-  useEffect(() => {
-    // setTimeout(() => {
-    //   setChangedArr((prev: any[]) => prev?.slice(1));
-    // }, 400);
-  }, [changedArr]);
+    lightStore.forEach((dot, index) => {
+      // Add class with a delay
+      const addClassTimeoutId = setTimeout(() => {
+        setDotsChanges((prevDots) => {
+          const newDot = { ...dot, isActive: true };
+          const newDots = [...prevDots];
+          newDots[index] = newDot;
+          return newDots;
+        });
+      }, 800 + 100 * index);
+
+      // Remove class after 2 seconds
+      const removeClassTimeoutId = setTimeout(() => {
+        setDotsChanges((prevDots) => {
+          const newDots = [...prevDots];
+          // Assuming you have a property like 'isActive' to toggle the class
+          newDots[index] = { ...newDots[index], isActive: false }; // Update isActive property
+          return newDots;
+        });
+      }, 800 + 10 * index); // 2000 milliseconds delay for removal
+
+      // Clear the timeouts to prevent memory leaks
+      return () => {
+        clearTimeout(addClassTimeoutId);
+        clearTimeout(removeClassTimeoutId);
+      };
+    });
+  }, [lightStore, lightStore.length]);
   const generateRows = () => {
     const rows = [];
-    changedArr?.lenght !== 0 &&
-      setTimeout(() => {
-        setChangedArr((prev: any[]) => prev?.slice(1));
-      }, 400);
+    //! light store - arr with objects, which contain x and y of ball direction
+
     for (let i = 0; i < rowCount; i++) {
       const dots = [];
 
       for (let j = 0; j < i + 3; j++) {
-        // let match;
-        // changedArr?.forEach((value) => {
-        //   setTimeout(() => {
-        //     setMatch(value.x === j && value.y === i);
-        //     // alert(match);
-        //   }, 200);
-        // });
-        let match =
-          changedArr && changedArr[0]?.x === j && changedArr[0]?.y === i;
-        //   // (changedArr && changedArr[1]?.x === j && changedArr[1]?.y === i) ||
-        //   // (changedArr && changedArr[2]?.x === j && changedArr[2]?.y === i);
-
         dots.push(
           <span
-            className={clsx(styles.dot, match && styles.dot_shadow)}
+            className={clsx(
+              styles.dot,
+
+              dotsChanges.some(
+                (dot) => dot.x === j && dot.y === i && dot.isActive
+              ) && styles.dot_shadow
+
+              // match && styles.dot_shadow
+            )}
             key={j}
           ></span>
         );

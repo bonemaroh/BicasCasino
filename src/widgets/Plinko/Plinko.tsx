@@ -38,7 +38,7 @@ const testBallPath = [
   [false, true, true, false, false, false, true, true],
   [true, true, true, true, true, true, true, true],
   [false, true, false, true, true, false, false, false],
-  [false, true, true, false, false, false, false, false],
+  [false, true, true, false, true, false, false, false],
   [true, true, false, false, false, true, false, true],
   [true, true, true, true, true, true, true, true],
   [false, true, true, false, false, true, false, false],
@@ -525,7 +525,7 @@ export const Plinko: FC<IPlinko> = () => {
           {path ? (
             <PlinkoPyramid path={path} />
           ) : (
-            <PlinkoPyramid path={testBallPath} />
+            <PlinkoPyramid path={undefined} />
           )}
         </div>
       </div>
