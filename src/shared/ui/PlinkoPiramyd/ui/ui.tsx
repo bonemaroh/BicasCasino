@@ -364,7 +364,7 @@ export const PlinkoPyramid: FC<IPlinkoPyramid> = (props) => {
     changedArr?.lenght !== 0 &&
       setTimeout(() => {
         setChangedArr((prev: any[]) => prev?.slice(1));
-      }, 400);
+      }, 200);
     for (let i = 0; i < rowCount; i++) {
       const dots = [];
 
