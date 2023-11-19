@@ -17,6 +17,7 @@ import { CustomWagerRangeInput } from "@/widgets/CustomWagerRangeInput";
 import Head from "next/head";
 import { useAccount, useConnect } from "wagmi";
 import { useEffect } from "react";
+import clsx from "clsx";
 
 const WagerContent = () => {
   const [pressButton] = useUnit([WagerModel.pressButton]);
@@ -27,7 +28,7 @@ const WagerContent = () => {
     <>
       <WagerInputsBlock />
       <button
-        className={s.poker_wager_drawing_cards_btn}
+        className={clsx(s.poker_wager_drawing_cards_btn, s.mobile)}
         onClick={() => {
           if (!isConnected) {
             connect({ connector: connectors[0] });
@@ -67,7 +68,7 @@ export default function PokerGame() {
           <GamePage
             isPoker={true}
             customTitle="Drawing cards"
-            gameInfoText="test"
+            gameInfoText="Video Poker - At the start of each round of the game, you are dealt 5 cards with 9 different potential winning combinations. After the first hand, you have the unique opportunity to turn over the cards and try your luck to re-create the best winning combination. In this version of video poker  a royal flush can increase your bet by 100 times, which is guaranteed to give you unforgettable emotions and excitement!"
             gameTitle="poker"
             wagerContent={<WagerContent />}
           >
