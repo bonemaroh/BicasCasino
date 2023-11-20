@@ -18,6 +18,7 @@ import { SideBarModel } from "@/widgets/SideBar";
 
 import * as BlurModel from "@/widgets/Blur/model";
 import * as MainWallet from "@/widgets/AvaibleWallet/model";
+import * as ConnectModel from "@/widgets/Layout/model";
 
 import { ABI as abi } from "@/shared/contracts/ClaimBonusABI";
 import { checkPageClicking } from "@/shared/tools";
@@ -156,9 +157,15 @@ export const PopUpBonus: FC = () => {
     setBlur(false);
   };
 
+  const [startConnect, setStartConnect] = useUnit([
+    ConnectModel.$startConnect,
+    ConnectModel.setConnect,
+  ]);
+
   //? shorten call claim func
   const claimBonus = () => {
     if (!isConnected) {
+      setStartConnect(true);
       handleConnectWalletBtn();
     } else if (chain?.id !== 42161) {
       switchNetwork!(42161);
@@ -179,6 +186,14 @@ export const PopUpBonus: FC = () => {
       document.documentElement.style.height = "auto";
     };
   }, []);
+  useEffect(() => {
+    isConnecting && setStartConnect(false);
+  }, []);
+  useEffect(() => {
+    return () => {
+      setStartConnect(false);
+    };
+  }, []);
   const claimedFromStorage =
     address && localStorage.getItem(address)
       ? JSON.parse(localStorage.getItem(address)!)
@@ -191,6 +206,7 @@ export const PopUpBonus: FC = () => {
     document.documentElement.style.height = "auto";
     return;
   }
+
   return (
     <div
       onClick={closeModal}
@@ -226,7 +242,7 @@ export const PopUpBonus: FC = () => {
               ) : (
                 "Claim"
               )
-            ) : isConnecting ? (
+            ) : isConnecting && startConnect ? (
               <LoadingDots className={s.dots_black} title="Connecting" />
             ) : (
               "Connect Wallet"

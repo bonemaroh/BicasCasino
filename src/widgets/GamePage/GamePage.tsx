@@ -36,6 +36,7 @@ import * as DGM from "@/widgets/Dice/model";
 import * as CFM from "@/widgets/CoinFlip/model";
 import * as PGM from "@/widgets/Plinko/model";
 import { PokerModel } from "@/widgets/Poker/Poker";
+import * as ConnectModel from "@/widgets/Layout/model";
 interface GamePageProps {
   children: ReactNode;
   gameTitle: string;
@@ -134,7 +135,13 @@ export const GamePage: FC<GamePageProps> = ({
 
   // const won = false;
   // const lost = false;
-
+  const [startConnect, setStartConnect] = useUnit([
+    ConnectModel.$startConnect,
+    ConnectModel.setConnect,
+  ]);
+  useEffect(() => {
+    isConnecting && setStartConnect(false);
+  }, []);
   const [pressButton] = useUnit([WagerModel.pressButton]);
   return (
     <div className={s.game_layout}>
@@ -190,6 +197,7 @@ export const GamePage: FC<GamePageProps> = ({
                     className={clsx(style.connect_wallet_btn, s.mobile)}
                     onClick={() => {
                       if (!isConnected) {
+                        setStartConnect(true);
                         connect({ connector: connectors[0] });
                       } else {
                         pressButton();
@@ -200,10 +208,15 @@ export const GamePage: FC<GamePageProps> = ({
                       }
                     }}
                   >
-                    {isDicePlaying ||
-                    isCFPlaying ||
-                    isPlinkoPlaying ||
-                    isPokerlaying ? (
+                    {isConnecting && startConnect ? (
+                      <LoadingDots
+                        className={s.dots_black}
+                        title="Connecting"
+                      />
+                    ) : isDicePlaying ||
+                      isCFPlaying ||
+                      isPlinkoPlaying ||
+                      isPokerlaying ? (
                       <LoadingDots className={s.dots_black} title="Playing" />
                     ) : isConnected ? (
                       customTitle ? (
@@ -211,11 +224,6 @@ export const GamePage: FC<GamePageProps> = ({
                       ) : (
                         "Place bet"
                       )
-                    ) : isConnecting ? (
-                      <LoadingDots
-                        className={s.dots_black}
-                        title="Connecting"
-                      />
                     ) : (
                       "Connect Wallet"
                     )}

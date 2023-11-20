@@ -25,17 +25,24 @@ import { useMediaQuery } from "@/shared/tools";
 
 import { LoadingDots } from "@/shared/ui/LoadingDots";
 
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect } from "react";
 
+import * as ConnectModel from "@/widgets/Layout/model";
 
 const WagerContent = () => {
+  const [startConnect, setStartConnect] = useUnit([
+    ConnectModel.$startConnect,
+    ConnectModel.setConnect,
+  ]);
   const isMobile = useMediaQuery("(max-width: 996px)");
   const { isConnected, isConnecting } = useAccount();
   const { connectors, connect } = useConnect();
   const [pressButton] = useUnit([WagerModel.pressButton]);
 
   const [isPlaying] = useUnit([DGM.$isPlaying]);
-
+  useEffect(() => {
+    isConnecting && setStartConnect(false);
+  }, []);
   return (
     <>
       <WagerInputsBlock />
@@ -52,6 +59,7 @@ const WagerContent = () => {
           className={s.connect_wallet_btn}
           onClick={() => {
             if (!isConnected) {
+              setStartConnect(true);
               connect({ connector: connectors[0] });
             } else {
               pressButton();
@@ -62,7 +70,7 @@ const WagerContent = () => {
             }
           }}
         >
-          {isConnecting ? (
+          {startConnect && isConnecting ? (
             <LoadingDots className={s.dots_black} title="Connecting" />
           ) : isPlaying ? (
             <LoadingDots className={s.dots_black} title="Playing" />

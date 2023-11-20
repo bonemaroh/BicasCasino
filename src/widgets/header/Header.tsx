@@ -42,6 +42,7 @@ import Link from "next/link";
 import { checkPageClicking } from "@/shared/tools";
 import clsx from "clsx";
 import { LoadingDots } from "@/shared/ui/LoadingDots";
+import * as ConnectModel from "@/widgets/Layout/model";
 
 interface EmblemProps {}
 const Emblem: FC<EmblemProps> = (props) => {
@@ -121,13 +122,25 @@ const ConnectWalletButton: FC<ConnectWalletButtonProps> = (props) => {
     document.documentElement.style.overflow = "visible";
   };
   const { isConnecting } = useAccount();
+
+  const [startConnect, setStartConnect] = useUnit([
+    ConnectModel.$startConnect,
+    ConnectModel.setConnect,
+  ]);
+
   return (
     <div
       className={s.connect_wallet_button_wrap}
       data-id={"connect-wallet-block"}
     >
-      <div className={s.connect_wallet_button} onClick={handleConnectWalletBtn}>
-        {isConnecting ? (
+      <div
+        className={s.connect_wallet_button}
+        onClick={() => {
+          setStartConnect(true);
+          handleConnectWalletBtn();
+        }}
+      >
+        {isConnecting && startConnect ? (
           <LoadingDots className={s.dots_black} title="Connecting" />
         ) : (
           "Connect Wallet"

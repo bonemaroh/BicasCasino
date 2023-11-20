@@ -20,13 +20,24 @@ import clsx from "clsx";
 import * as CFM from "@/widgets/CoinFlip/model";
 import { LoadingDots } from "@/shared/ui/LoadingDots";
 
+import * as ConnectModel from "@/widgets/Layout/model";
+import { useEffect } from "react";
+
 const WagerContent = () => {
+  const [startConnect, setStartConnect] = useUnit([
+    ConnectModel.$startConnect,
+    ConnectModel.setConnect,
+  ]);
   const [pressButton] = useUnit([WagerModel.pressButton]);
-  const { isConnected, isConnecting } = useAccount();
+  const { isConnected } = useAccount();
   const { connectors, connect } = useConnect();
 
   const [isPlaying] = useUnit([CFM.$isPlaying]);
 
+  const { isConnecting } = useAccount();
+  useEffect(() => {
+    isConnecting && setStartConnect(false);
+  }, []);
   return (
     <>
       <WagerInputsBlock />
@@ -44,6 +55,7 @@ const WagerContent = () => {
         onClick={() => {
           if (!isConnected) {
             connect({ connector: connectors[0] });
+            setStartConnect(true);
           } else {
             pressButton();
             (window as any).fbq("track", "Purchase", {
@@ -53,7 +65,7 @@ const WagerContent = () => {
           }
         }}
       >
-        {isConnecting ? (
+        {startConnect && isConnecting ? (
           <LoadingDots className={s.dots_black} title="Connecting" />
         ) : isPlaying ? (
           <LoadingDots className={s.dots_black} title="Playing" />

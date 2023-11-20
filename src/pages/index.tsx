@@ -92,6 +92,7 @@ import { Blur } from "@/widgets/Blur/Blur";
 import { useDeviceType } from "@/shared/tools";
 import { PopUpBonus } from "@/widgets/PopUpBonus";
 import { LoadingDots } from "@/shared/ui/LoadingDots";
+import * as ConnectModel from "@/widgets/Layout/model";
 
 const mobileQuery = "(max-width: 650px)";
 
@@ -322,15 +323,19 @@ const BannerInfo: FC<BannerInfoProps> = (props) => {
     BlurModel.setBlur,
   ]);
 
-  const { isConnected } = useAccount();
+  const { isConnected, isConnecting } = useAccount();
 
   const hideAvaibleWallet = () => {
     close();
     setBlur(false);
     document.documentElement.style.overflow = "visible";
   };
-
+  const [startConnect, setStartConnect] = useUnit([
+    ConnectModel.$startConnect,
+    ConnectModel.setConnect,
+  ]);
   const handleConnectWalletBtn = () => {
+    setStartConnect(true);
     if (!isMainWalletOpen) {
       open();
       setBlur(true);
@@ -342,8 +347,9 @@ const BannerInfo: FC<BannerInfoProps> = (props) => {
       document.documentElement.style.overflow = "visible";
     }
   };
-  const { isConnecting } = useAccount();
-
+  useEffect(() => {
+    isConnecting && setStartConnect(false);
+  }, []);
   return (
     <div className={s.banner_info}>
       <div className={s.header}>Top 1 Casino on the WEB3</div>
@@ -352,7 +358,7 @@ const BannerInfo: FC<BannerInfoProps> = (props) => {
           <>
             <div className={s.text}>Login via Web3 wallets</div>
             <div className={s.button} onClick={handleConnectWalletBtn}>
-              {isConnecting ? (
+              {startConnect && isConnecting ? (
                 <LoadingDots className={s.join_dots} title="Connecting" />
               ) : (
                 "Connect Wallet"
@@ -465,9 +471,16 @@ export default function Home() {
   // useEffect(() =>
   //   console.log("New bets");
   // }, [Bets]);
-
+  const [startConnect, setStartConnect] = useUnit([
+    ConnectModel.$startConnect,
+    ConnectModel.setConnect,
+  ]);
   useEffect(() => {
     preloadModel();
+  }, []);
+  const { isConnecting } = useAccount();
+  useEffect(() => {
+    isConnecting && setStartConnect(false);
   }, []);
   return (
     <>

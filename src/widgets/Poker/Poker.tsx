@@ -33,6 +33,7 @@ import { ABI as IERC20 } from "@/shared/contracts/ERC20";
 import * as api from "@/shared/api";
 import { TOKENS } from "@/shared/tokens";
 import { useDebounce } from "@/shared/tools";
+import * as ConnectModel from "@/widgets/Layout/model";
 
 const initialArrayOfCards = [
   {
@@ -135,6 +136,8 @@ export const Poker: FC<PokerProps> = (props) => {
   const [inGame, setInGame] = useState<boolean>(false);
 
   const [watchState, setWatchState] = useState<boolean>(false);
+
+  const { isConnecting } = useAccount();
 
   useEffect(() => {
     setIsPlaying(inGame);
@@ -404,6 +407,13 @@ export const Poker: FC<PokerProps> = (props) => {
     setActiveCards(gameState ? gameState : initialArrayOfCards);
     playDrawnCards();
   }, [gameState]);
+  const [startConnect, setStartConnect] = useUnit([
+    ConnectModel.$startConnect,
+    ConnectModel.setConnect,
+  ]);
+  useEffect(() => {
+    isConnecting && setStartConnect(false);
+  }, []);
 
   // useEffect(() => {
   //   console.log("Cards state", props.cardsState);

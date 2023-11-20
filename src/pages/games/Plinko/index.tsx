@@ -21,6 +21,7 @@ import clsx from "clsx";
 import * as PGM from "@/widgets/Plinko/model";
 import { LoadingDots } from "@/shared/ui/LoadingDots";
 import { useEffect } from "react";
+import * as ConnectModel from "@/widgets/Layout/model";
 
 const WagerContent = () => {
   const { connectors, connect } = useConnect();
@@ -28,9 +29,14 @@ const WagerContent = () => {
   const [pressButton] = useUnit([WagerModel.pressButton]);
 
   const [isPlaying] = useUnit([PGM.$isPlaying]);
-
+  const [startConnect, setStartConnect] = useUnit([
+    ConnectModel.$startConnect,
+    ConnectModel.setConnect,
+  ]);
   console.log("ssssstate - ", isPlaying);
-
+  useEffect(() => {
+    isConnecting && setStartConnect(false);
+  }, []);
   return (
     <>
       {/* <SidePicker /> */}
@@ -53,6 +59,7 @@ const WagerContent = () => {
         className={clsx(s.connect_wallet_btn, styles.mobile)}
         onClick={() => {
           if (!isConnected) {
+            setStartConnect(true);
             connect({ connector: connectors[0] });
           } else {
             pressButton();
@@ -63,7 +70,7 @@ const WagerContent = () => {
           }
         }}
       >
-        {isConnecting ? (
+        {isConnecting && startConnect ? (
           <LoadingDots className={s.dots_black} title="Connecting" />
         ) : isPlaying ? (
           <LoadingDots className={s.dots_black} title="Playing" />

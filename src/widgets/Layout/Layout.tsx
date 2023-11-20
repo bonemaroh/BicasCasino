@@ -8,12 +8,14 @@ import { Blur } from "@/widgets/Blur/Blur";
 import { useUnit } from "effector-react";
 import { Footer } from "@/widgets/Footer";
 import { SettingsInit } from "../SettingsInit";
-import { WagmiConfig } from "wagmi";
+import { WagmiConfig, useAccount } from "wagmi";
 import { web3 } from "@/entities/web3";
 import * as SidebarM from "@/widgets/SideBar/model";
 import { SessionInit } from "../SessionSettings";
 import { PopUpBonus } from "../PopUpBonus";
 import * as SwapModel from "@/widgets/Swap/model/index";
+
+import * as ConnectModel from "./model";
 
 import clsx from "clsx";
 import { useMediaQuery } from "@/shared/tools";
