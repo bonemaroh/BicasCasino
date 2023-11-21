@@ -15,8 +15,6 @@ import { SessionInit } from "../SessionSettings";
 import { PopUpBonus } from "../PopUpBonus";
 import * as SwapModel from "@/widgets/Swap/model/index";
 
-import * as ConnectModel from "./model";
-
 import clsx from "clsx";
 import { useMediaQuery } from "@/shared/tools";
 interface LayoutProps {
